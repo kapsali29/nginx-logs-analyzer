@@ -27,9 +27,10 @@ def runner(container: str, metadata: bool, logs: bool, to_csv: str) -> None:
         if logs:
             raw_container_logs = nginx_container.logs()
             clean_logs = logs_parser.process_container_logs(raw_container_logs)
-            logs_df = BaseAnalyzer.create(nginx_logs=clean_logs)
+            base_analyzer = BaseAnalyzer.create(nginx_logs=clean_logs)
+            breakpoint()
             if to_csv:
-                logs_df.to_csv(name=to_csv)
+                base_analyzer.to_csv(name=to_csv)
             logger.info(clean_logs)
     except Exception as ex:
         logger.error(ex)
