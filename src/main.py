@@ -1,9 +1,11 @@
 import sys
-import click
-import polars as pl
 import textwrap
-from logger import setup_logger
-from nginx_logs_parser.main import NginxLogsParser
+
+import click
+
+from .logger import setup_logger
+from .nginx_logs_parser.main import NginxLogsParser
+from .nginx_logs_analyzer.main import BaseAnalyzer
 
 logger = setup_logger(__name__)
 
@@ -25,14 +27,14 @@ def runner(container: str, metadata: bool, logs: bool, to_csv: str) -> None:
         if logs:
             raw_container_logs = nginx_container.logs()
             clean_logs = logs_parser.process_container_logs(raw_container_logs)
-            clean_logs_dict = [obj.model_dump() for obj in clean_logs]
-            logs_df = pl.DataFrame(clean_logs_dict)
+            logs_df = BaseAnalyzer.create(nginx_logs=clean_logs)
             if to_csv:
-                logs_df.write_csv(to_csv, separator=",")
+                logs_df.to_csv(name=to_csv)
             logger.info(clean_logs)
     except Exception as ex:
         logger.error(ex)
         sys.exit(1)
+
 
 if __name__ == "__main__":
     runner()
