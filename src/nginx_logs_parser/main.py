@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import docker
-import re
 from pydantic import BaseModel, ConfigDict
 from docker.client import DockerClient
 from docker.models.containers import Container
 from .models import NginxContainerMetadata, NginxLogRecord
+from .settings import LOG_PATTERN
 
 
 class NginxLogsParser(BaseModel):
@@ -42,13 +42,7 @@ class NginxLogsParser(BaseModel):
     @staticmethod
     def transform_to_log_record(log_line: str) -> NginxLogRecord | None:
         """transform log line"""
-
-        pattern = re.compile(
-            r"^(?P<remote_addr>\S+) - (?P<remote_user>\S+) \[(?P<time_local>[^\]]+)\] "
-            r'"(?P<request>[^"]*)" (?P<status>\d{3}) (?P<body_bytes_sent>\d+) '
-            r'"(?P<http_referer>[^"]*)" "(?P<http_user_agent>[^"]*)"'
-        )
-        match = pattern.match(log_line)
+        match = LOG_PATTERN.match(log_line)
         if match:
             data = match.groupdict()
             nginx_record = NginxLogRecord(
