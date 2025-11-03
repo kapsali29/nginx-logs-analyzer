@@ -16,6 +16,8 @@ class BaseAnalyzer(BaseModel):
         clean_logs_dict = [obj.model_dump() for obj in nginx_logs]
         return cls(logs_df=pl.DataFrame(clean_logs_dict))
 
-    def to_csv(self, name: str, separator: str = ",") -> None:
-        """writes logs to csv"""
-        self.logs_df.write_csv(name, separator=separator)
+    @staticmethod
+    def write_report(filename: str, report_contents: str) -> None:
+        """store report contents"""
+        with open(filename, "w", encoding="utf-8") as report_file:
+            report_file.write(report_contents)

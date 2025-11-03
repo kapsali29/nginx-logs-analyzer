@@ -14,8 +14,8 @@ Usage: python -m src.main [OPTIONS]
 
 Options:
   -c, --container TEXT  Container Name
-  -l, --logs            Extract logs
   -m, --metadata        Print Container Metadata
-  --to-csv TEXT         Export logs to CSV
+  --to-csv TEXT         Store Report result to file
+  -f, --filename TEXT   Extract from Log file
   --help                Show this message and exit.
 ```
