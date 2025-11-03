@@ -3,9 +3,9 @@ import sys
 import click
 
 from .logger import setup_logger
-from .nginx_logs_parser.container import extract_container_logs
-from .nginx_logs_analyzer.report import LogsReport
-from .nginx_logs_parser.file import extract_file_logs
+from .parser.container import extract_container_logs
+from .operations.report import LogsReport
+from .parser.file import extract_file_logs
 
 logger = setup_logger(__name__)
 

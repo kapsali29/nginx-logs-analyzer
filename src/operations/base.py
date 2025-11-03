@@ -1,7 +1,7 @@
 from __future__ import annotations
 import polars as pl
 from pydantic import BaseModel, ConfigDict
-from src.nginx_logs_parser.container import NginxLogRecord
+from src.parser.container import NginxLogRecord
 
 
 class BaseAnalyzer(BaseModel):

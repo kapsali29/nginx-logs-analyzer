@@ -1,0 +1,139 @@
+Status Information
+------------------------------
+Status Code=403 Counts=53
+Status Code=200 Counts=56
+Status Code=302 Counts=45
+Status Code=502 Counts=58
+Status Code=201 Counts=64
+Status Code=400 Counts=63
+Status Code=301 Counts=48
+Status Code=404 Counts=53
+Status Code=500 Counts=60
+
+Most Frequent IPs
+------------------------------
+IP=203.0.113.5 Counts=89
+IP=198.51.100.23 Counts=86
+IP=198.51.100.88 Counts=76
+IP=203.0.113.9 Counts=95
+IP=192.0.2.15 Counts=72
+IP=172.17.0.1 Counts=82
+
+Most Frequent Methods
+------------------------------
+HTTP Method=PUT Counts=103
+HTTP Method=GET Counts=140
+HTTP Method=POST Counts=125
+HTTP Method=DELETE Counts=132
+
+Most Frequent Methods per IP
+------------------------------
+Most Frequest Methods for IP=172.17.0.1
+------------------------------
+HTTP Method=GET Counts=30
+HTTP Method=DELETE Counts=20
+HTTP Method=POST Counts=17
+HTTP Method=PUT Counts=15
+
+Most Frequest Methods for IP=198.51.100.88
+------------------------------
+HTTP Method=GET Counts=24
+HTTP Method=POST Counts=19
+HTTP Method=PUT Counts=10
+HTTP Method=DELETE Counts=23
+
+Most Frequest Methods for IP=203.0.113.5
+------------------------------
+HTTP Method=DELETE Counts=27
+HTTP Method=POST Counts=24
+HTTP Method=PUT Counts=18
+HTTP Method=GET Counts=20
+
+Most Frequest Methods for IP=198.51.100.23
+------------------------------
+HTTP Method=DELETE Counts=23
+HTTP Method=GET Counts=19
+HTTP Method=POST Counts=20
+HTTP Method=PUT Counts=24
+
+Most Frequest Methods for IP=192.0.2.15
+------------------------------
+HTTP Method=POST Counts=20
+HTTP Method=DELETE Counts=11
+HTTP Method=GET Counts=23
+HTTP Method=PUT Counts=18
+
+Most Frequest Methods for IP=203.0.113.9
+------------------------------
+HTTP Method=GET Counts=24
+HTTP Method=POST Counts=25
+HTTP Method=DELETE Counts=28
+HTTP Method=PUT Counts=18
+
+
+Most Frequent Endpoints
+------------------------------
+Endpoint='/images/logo.png' Counts=47
+Endpoint='/login' Counts=43
+Endpoint='/robots.txt' Counts=46
+Endpoint='/' Counts=42
+Endpoint='/health' Counts=45
+Endpoint='/dashboard' Counts=59
+Endpoint='/api/v1/products' Counts=52
+Endpoint='/static/js/app.js' Counts=62
+Endpoint='/favicon.ico' Counts=53
+Endpoint='/api/v1/users' Counts=51
+
+Requests per Hour
+------------------------------
+Hour=0 Requests=23
+Hour=1 Requests=23
+Hour=2 Requests=26
+Hour=3 Requests=21
+Hour=4 Requests=23
+Hour=5 Requests=24
+Hour=6 Requests=15
+Hour=7 Requests=12
+Hour=8 Requests=19
+Hour=9 Requests=19
+Hour=10 Requests=15
+Hour=11 Requests=17
+Hour=12 Requests=16
+Hour=13 Requests=22
+Hour=14 Requests=20
+Hour=15 Requests=21
+Hour=16 Requests=24
+Hour=17 Requests=21
+Hour=18 Requests=25
+Hour=19 Requests=23
+Hour=20 Requests=15
+Hour=21 Requests=19
+Hour=22 Requests=29
+Hour=23 Requests=28
+
+Mean Bytes Sent per Hour
+------------------------------
+Hour=0 Bytes=21214.521739130436
+Hour=1 Bytes=25503.130434782608
+Hour=2 Bytes=31615.26923076923
+Hour=3 Bytes=30396.95238095238
+Hour=4 Bytes=27231.217391304348
+Hour=5 Bytes=28700.708333333332
+Hour=6 Bytes=29250.4
+Hour=7 Bytes=23469.5
+Hour=8 Bytes=22050.894736842107
+Hour=9 Bytes=25872.842105263157
+Hour=10 Bytes=20504.8
+Hour=11 Bytes=19484.235294117647
+Hour=12 Bytes=25666.4375
+Hour=13 Bytes=30207.18181818182
+Hour=14 Bytes=27756.2
+Hour=15 Bytes=27748.47619047619
+Hour=16 Bytes=23446.583333333332
+Hour=17 Bytes=23015.52380952381
+Hour=18 Bytes=26765.32
+Hour=19 Bytes=28724.82608695652
+Hour=20 Bytes=19181.733333333334
+Hour=21 Bytes=21624.105263157893
+Hour=22 Bytes=30082.55172413793
+Hour=23 Bytes=20816.5
