@@ -5,9 +5,9 @@ import docker
 from pydantic import BaseModel, ConfigDict
 from docker.client import DockerClient
 from docker.models.containers import Container
-from src.logger import setup_logger
+from src.common.logger import setup_logger
+from src.common.settings import LOG_PATTERN
 from .models import NginxContainerMetadata, NginxLogRecord
-from .settings import LOG_PATTERN
 
 logger = setup_logger(__name__)
 

@@ -1,7 +1,7 @@
 from __future__ import annotations
 from pydantic import BaseModel
 from .models import NginxLogRecord
-from .settings import LOG_PATTERN
+from ..common.settings import LOG_PATTERN
 
 
 class FileLogsParser(BaseModel):

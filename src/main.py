@@ -2,7 +2,7 @@ import sys
 
 import click
 
-from .logger import setup_logger
+from .common.logger import setup_logger
 from .parser.container import extract_container_logs
 from .operations.report import LogsReport
 from .parser.file import extract_file_logs
