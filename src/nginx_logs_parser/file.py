@@ -41,3 +41,10 @@ class FileLogsParser(BaseModel):
                 if nginx_log_record:
                     clean_logs.append(nginx_log_record)
         return cls(logs=clean_logs)
+
+
+def extract_file_logs(filename: str) -> list[NginxLogRecord]:
+    """Extracts logs from file"""
+    file_logs_parser = FileLogsParser.create_from_log_file(filename=filename)
+    clean_logs = file_logs_parser.logs
+    return clean_logs

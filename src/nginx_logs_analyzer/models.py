@@ -14,7 +14,7 @@ class IPVisit(Counter):
 
     def to_str(self) -> str:
         """to string"""
-        return f"""{self.ip}:{self.counter}"""
+        return f"""IP={self.ip} Counts={self.counter}"""
 
 
 class StatusCounter(Counter):
@@ -58,3 +58,24 @@ class EndpointCounter(Counter):
     def to_str(self) -> str:
         """to string"""
         return f"""Endpoint='{self.endpoint}' Counts={self.counter}"""
+
+
+class TrafficPerHour(Counter):
+    """Counts requests per hour"""
+
+    hour: int
+
+    def to_str(self) -> str:
+        """to string"""
+        return f"""Hour={self.hour} Requests={self.counter}"""
+
+
+class AvgBytesPerHour(BaseModel):
+    """Avg Bytes Sent"""
+
+    hour: int
+    bytes: float
+
+    def to_str(self) -> str:
+        """to string"""
+        return f"""Hour={self.hour} Bytes={self.bytes}"""

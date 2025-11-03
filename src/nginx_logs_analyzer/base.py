@@ -14,7 +14,17 @@ class BaseAnalyzer(BaseModel):
     def create(cls, nginx_logs: list[NginxLogRecord]) -> BaseAnalyzer:
         """instantiate the BaseModel"""
         clean_logs_dict = [obj.model_dump() for obj in nginx_logs]
-        return cls(logs_df=pl.DataFrame(clean_logs_dict))
+        logs_df = (
+            pl.DataFrame(clean_logs_dict)
+            .with_columns(pl.col("time_local").str.to_datetime("%d/%b/%Y:%H:%M:%S %z"))
+            .with_columns(
+                [
+                    pl.col("time_local").dt.hour().alias("hour"),
+                    pl.col("time_local").dt.day().alias("day"),
+                ]
+            )
+        )
+        return cls(logs_df=logs_df)
 
     @staticmethod
     def write_report(filename: str, report_contents: str) -> None:

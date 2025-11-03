@@ -2,13 +2,15 @@ from collections import Counter
 
 import polars as pl
 
-from .main import BaseAnalyzer
+from .base import BaseAnalyzer
 from .models import (
     IPVisit,
     StatusCounter,
     HTTPMethodCounter,
     IPMethods,
     EndpointCounter,
+    TrafficPerHour,
+    AvgBytesPerHour,
 )
 
 
@@ -94,24 +96,28 @@ class NginxLogsReports(BaseAnalyzer):
             for data in endpoint_items
         ]
 
-    def log_report(self) -> str:
-        """gathers reports"""
-        status_counters_str = "\n".join(
-            [obj.to_str() for obj in self.get_status_counter()]
+    def traffic_per_hours(self) -> list[TrafficPerHour]:
+        """traffic per hour"""
+        traffic = (
+            self.logs_df.group_by(["hour"])
+            .agg(pl.col("remote_add").count().alias("requests"))
+            .sort(by="hour")
+            .to_dicts()
         )
-        ip_visits_str = "\n".join([obj.to_str() for obj in self.get_ip_visits()])
-        num_of_methods_str = "\n".join(
-            [obj.to_str() for obj in self.get_methods_counter()]
-        )
-        ip_methods_str = "\n".join([obj.to_str() for obj in self.ip_methods_counter()])
-        endpoints_str = "\n".join([obj.to_str() for obj in self.endpoint_counter()])
-
-        sections = [
-            ("Status Information", status_counters_str),
-            ("Most Frequent IPs", ip_visits_str),
-            ("Most Frequent Methods", num_of_methods_str),
-            ("Most Frequent Methods per IP", ip_methods_str),
-            ("Most Frequent Endpoints", endpoints_str),
+        return [
+            TrafficPerHour(hour=data["hour"], counter=data["requests"])
+            for data in traffic
         ]
-        result = "\n\n".join(f"{title}\n{'-' * 30}\n{body}" for title, body in sections)
-        return result
+
+    def average_bytes_per_hour(self) -> list[AvgBytesPerHour]:
+        """calculations"""
+        avg_bytes = (
+            self.logs_df.group_by(["hour"])
+            .agg(pl.col("body_bytes_sent").mean().alias("avg_bytes_per_hour"))
+            .sort(by="hour")
+            .to_dicts()
+        )
+        return [
+            AvgBytesPerHour(hour=data["hour"], bytes=data["avg_bytes_per_hour"])
+            for data in avg_bytes
+        ]

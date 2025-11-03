@@ -1,11 +1,15 @@
 from __future__ import annotations
 
+import textwrap
 import docker
 from pydantic import BaseModel, ConfigDict
 from docker.client import DockerClient
 from docker.models.containers import Container
+from src.logger import setup_logger
 from .models import NginxContainerMetadata, NginxLogRecord
 from .settings import LOG_PATTERN
+
+logger = setup_logger(__name__)
 
 
 class NginxLogsParser(BaseModel):
@@ -69,3 +73,18 @@ class NginxLogsParser(BaseModel):
             if nginx_log_record:
                 clean_logs.append(nginx_log_record)
         return clean_logs
+
+
+def extract_container_logs(
+    container: str, metadata: bool = False
+) -> list[NginxLogRecord]:
+    """Extracts logs from Nginx Container"""
+    logs_parser = NginxLogsParser.create()
+    nginx_container = logs_parser.get_nginx_container(name=container)
+    raw_container_logs = nginx_container.logs()
+    clean_logs = logs_parser.process_container_logs(raw_container_logs)
+    if metadata:
+        metadata_records = logs_parser.get_nginx_metadata(container=nginx_container)
+        metadata_report = metadata_records.to_report()
+        logger.info(textwrap.dedent(metadata_report).strip())
+    return clean_logs
